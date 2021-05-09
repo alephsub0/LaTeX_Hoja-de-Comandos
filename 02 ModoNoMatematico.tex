@@ -1,0 +1,412 @@
+\documentclass[a4,11pt]{aleph-notas}
+
+% -- Paquetes adicionales
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{aleph-comandos}
+
+% -- Datos del libro
+\universidad{Proyecto Alephsub0}
+\autor{Andrés Merino}
+\materia{\LaTeX}
+\nota{Comandos básicos}
+\tema{}
+\fecha{Mayo de 2021}
+
+
+% -- Logo y colores
+\logouno[4.5cm]{LogoAlephsub0-02}
+\longtitulo{0.6\linewidth}
+
+% -- Otros comandos
+\geometry{margin=10mm}
+\setlength{\parskip}{0ex}
+\usepackage{ragged2e}
+    \setlength{\RaggedRightParindent}{1em}
+
+\usepackage{url}
+\usepackage{listings}
+\lstset{%
+    basicstyle=\scriptsize\ttfamily,  % the size of the fonts 
+    columns=fixed, % anything else is horrifying
+    showspaces=false,       % show spaces using underscores?
+    showstringspaces=false, % underline spaces within strings?
+    showtabs=false,% show tabs within strings?
+    xleftmargin=1.5em,      % left margin space
+}
+\lstdefinestyle{inline}{basicstyle=\ttfamily}
+
+\usepackage{titlesec}
+    \titleformat{\section}[runin]{\color{colortext}\bf}{}{0em}{}
+    \titlespacing*{\section}{0em}{0.65ex}{0.67em}
+
+\pagestyle{empty}
+
+\newlength{\MyLen}
+
+\begin{document}
+\encabezado
+
+\thispagestyle{empty}
+\RaggedRight
+
+\begin{multicols}{2}
+
+\section{Clases de documento}
+Utilizar al inicio del documento:
+\verb!\documentclass{!\textit{clase}\verb!}!. Utilice \verb!\begin{document}! para iniciar el contenido y \verb!\end{document}! para tenrminarlo.
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\verb!book!    & Para formato de libro. \\
+\verb!report!  & Para formato de reporte. \\
+\verb!article! & Para formato de artículo. \\
+\verb!letter!  & Para formato de carta. \\
+\verb!beamer!  & Para formato de presentación.
+\end{tabular}
+\end{center}
+
+\section{Opciones básicas de \texttt{documentclass}}
+Utilizar\linebreak \verb!\documentclass[!\textit{opt,opt}\verb!]{!\textit{class}\verb!}!.
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\texttt{10pt}/\texttt{11pt}/\texttt{12pt} & Tamaño de fuente. \\
+\texttt{a4paper}/\texttt{a5paper} & Tamaño del papel.
+\end{tabular}
+\end{center}
+
+\section{Paquetes básicos}
+
+Utilizar antes de \verb!\begin{document}!. 
+Modo de uso: \verb!\usepackage[!\textit{opc}\verb!]{!\textit{paquete}\verb!}!
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+    \texttt{inputenc}  &  Reconoce caracteres latinos (\texttt{utf8}). \\
+    \texttt{fontenc}   &  Despliega caracteres latinos (\texttt{T1}). \\
+    \texttt{babel}   &  Cambia idioma a español (\texttt{spanish}).     \\
+    \texttt{multicol}  & Permite utilizar varias columnas.\\
+    \texttt{graphicx}  & Permite importar imágenes.\\
+    \texttt{url}       & Permite insertar direcciones electrónicas.\\
+    \texttt{geometry}  & Permite cambiar la geometría de la página.
+\end{tabular}
+\end{center}
+
+\section{Medidas y geometría}
+Las unidades de medida permitidas son:
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+    \verb!mm! & milímetros 
+    &\verb!\textwidth! & ancho de texto\\
+    \verb!cm! & centímetros 
+    &\verb!\linewidth! & ancho de linea\\
+    \verb!in! & pulgadas 
+    &\verb!px! & pixeles 
+\end{tabular}
+\end{center}
+Utilizar el comando \verb!\geometry!, por ejemplo
+\verb!\geometry{margin=2cm}!
+
+
+\section{Titulo}
+Estos comandos van antes de \verb!\begin{document}!. El comando \verb!\maketitle! va en la parte superior del documento.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+    \verb!\author{!\textit{texot}\verb!}! & Autor del documento. \\
+    \verb!\title{!\textit{texto}\verb!}!  & Título del  documento. \\
+    \verb!\date{!\textit{texto}\verb!}!   & Fecha. \\
+\end{tabular}
+\end{center}
+
+
+\section{Estructura del documento}
+Utilizar un \texttt{*}, como en \verb!\section*{!\textit{título}\verb!}!, para no numerar.
+
+\begin{multicols}{2}
+\verb!\part{!\textit{título}\verb!}!  \\
+\verb!\chapter{!\textit{título}\verb!}!  \\
+\verb!\section{!\textit{título}\verb!}!  \\
+\verb!\subsection{!\textit{título}\verb!}!  \\
+\verb!\subsubsection{!\textit{título}\verb!}!  \\
+\verb!\paragraph{!\textit{título}\verb!}!  \\
+\verb!\subparagraph{!\textit{título}\verb!}!
+\end{multicols}
+
+
+
+\section{Referencias}
+
+\begin{center}
+\settowidth{\MyLen}{\texttt{.pageref.marker..}}
+\begin{tabular}{@{}p{\the\MyLen}%
+                @{}p{\linewidth-\the\MyLen}@{}}
+    \verb!\label{!\textit{etiq}\verb!}!   
+        &  Agrega una etiqueta. \\
+    \verb!\ref{!\textit{etiq}\verb!}!   
+        &  Regresa el número de la etiqueta \\
+    \verb!\pageref{!\textit{etiq}\verb!}! 
+        &  Regresa el número de página de la etiqueta. \\
+    \verb!\footnote{!\textit{texto}\verb!}!  
+        &  Genera una nota al pie. \\
+\end{tabular}
+\end{center}
+
+\section{Flotantes}
+El \textit{lugar} puede ser \texttt{t}=arriba,
+\texttt{h}=aquí, \texttt{b}=abajo, \texttt{p}=página aparte, \texttt{H}=obligatoriamente aquí (paquete \texttt{float}. Las leyendas y etiquetas deben estar dentro del ambiente.
+
+\begin{center}
+\settowidth{\MyLen}{\texttt{.begin.equationlugar.}}
+\begin{tabular}{@{}p{\the\MyLen}%
+                @{}p{\linewidth-\the\MyLen}@{}}
+    \verb!\begin{table}[!\textit{lugar}\verb!]!
+        &  Agrega un cuadro numerado. \\
+    \verb!\begin{figure}[!\textit{lugar}\verb!]!
+        &  Agrega una figura numerada. \\
+    \verb!\caption{!\textit{texto}\verb!}!
+        &  Coloca la leyenda. \\
+\end{tabular}
+\end{center}
+
+
+\section{Tipo de fuente}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\textit{Comando} & \textit{Declaración} & \textit{Efecto} \\
+    \verb!\textrm{!\textit{texto}\verb!}!            
+    & \verb!{\rmfamily !\textit{texto}\verb!}!       
+    & \textrm{Roman family} 
+    \\
+    \verb!\textsf{!\textit{texto}\verb!}!            
+    & \verb!{\sffamily !\textit{texto}\verb!}!       
+    & \textsf{Sans serif family} 
+    \\
+    \verb!\texttt{!\textit{texto}\verb!}!            
+    & \verb!{\ttfamily !\textit{texto}\verb!}!       
+    & \texttt{Typewriter family} 
+    \\
+    \verb!\textbf{!\textit{texto}\verb!}!            
+    & \verb!{\bfseries !\textit{texto}\verb!}!       
+    & \textbf{Bold series} 
+    \\
+    \verb!\textit{!\textit{texto}\verb!}!            
+    & \verb!{\itshape !\textit{texto}\verb!}!       
+    & \textit{Italic shape} 
+    \\
+    \verb!\textsl{!\textit{texto}\verb!}!            
+    & \verb!{\slshape !\textit{texto}\verb!}!       
+    & \textsl{Slanted shape} 
+    \\
+    \verb!\textsc{!\textit{texto}\verb!}!            
+    & \verb!{\scshape !\textit{texto}\verb!}!       
+    & \textsc{Small Caps shape} 
+    \\
+    \verb!\emph{!\textit{texto}\verb!}!              
+    & \verb!{\em !\textit{texto}\verb!}!       
+    & \emph{Emphasized} 
+\end{tabular}
+\end{center}
+
+
+\section{Tamaño de fuente}
+Estas declaraciones pueden utilizarse de la forma
+\verb!{\small! \ldots\verb!}!, o sin las llaves para afectar a todo el documento.
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+    \verb!\tiny!
+    &\tiny{tiny} 
+    &\verb!\large!
+    &\large{large}
+    \\
+    \verb!\scriptsize!
+    &\scriptsize{scriptsize}
+    &\verb!\Large!
+    &\Large{Large}
+    \\
+    \verb!\footnotesize!
+    &\footnotesize{footnotesize} 
+    &\verb!\LARGE!
+    &\LARGE{LARGE} 
+    \\
+    \verb!\small!
+    &\small{small} 
+    &\verb!\huge!
+    &\huge{huge} 
+    \\
+    \verb!\normalsize!
+    &\normalsize{normalsize} 
+    & \verb!\Huge!
+    &\Huge{Huge}
+\end{tabular}
+\end{center}
+
+
+
+\section{Listas}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+    \verb!\begin{enumerate}!   &  Lista numerada. \\
+    \verb!\begin{itemize}!     &  Lista no numerada. \\
+    \verb!\begin{description}! &  Lista de descripción. \\
+    \verb!\item! \textit{texto}&  Agregar ítem. \\
+    \verb!\item[!\textit{x}\verb!]! \textit{texto} &  Utiliza \textit{x} en lugar de la viñeta. \\
+\end{tabular}
+\end{center}
+
+Ejemplos:\\
+\begin{minipage}{0.45\linewidth}
+\begin{enumerate}
+    \item 
+        Primero
+    \item 
+        Segundo
+\end{enumerate}
+\end{minipage}
+%
+\begin{minipage}{0.45\linewidth}
+\begin{verbatim}
+\begin{enumerate}
+    \item 
+        Primero
+    \item 
+        Segundo
+\end{enumerate}
+\end{verbatim}
+\end{minipage}
+
+
+
+
+\section{Justificación}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\textit{Ambiente}  &  \textit{Declaración}  \\
+\verb!\begin{center}!      & \verb!\centering!  \\
+\verb!\begin{flushleft}!  & \verb!\raggedright! \\
+\verb!\begin{flushright}! & \verb!\raggedleft!  \\
+\end{tabular}
+\end{center}
+
+
+\section{Símbolos}
+
+\begin{center}
+\begin{tabular}{@{}ll@{\hspace{3em}}ll@{\hspace{3em}}ll@{}}
+    \& & \verb!\&! 
+    &
+    \_ & \verb!\_! 
+    &
+    \ldots & \verb!\ldots! 
+       \\
+    \$ & \verb!\$! 
+    &
+    \^{} & \verb!\^{}! 
+    &
+    \textbar 
+    &  \verb!\textbar! 
+    \\
+    \% &  \verb!\%! 
+    &
+    \~{} &  \verb!\~{}! 
+    &
+    \textbullet & \verb!\textbullet!   
+    \\
+    \# &  \verb!\#! 
+    &
+    \S &  \verb!\S! 
+    &
+    \textbackslash & \verb!\textbackslash!
+\end{tabular}
+\end{center}
+
+\section{Varios}
+
+\begin{center}
+\settowidth{\MyLen}{\texttt{.rule.w..h...} }
+\begin{tabular}{@{}p{\the\MyLen}%
+                @{}p{0.95\linewidth-\the\MyLen}@{}}
+    \verb!``comillas''!  
+        &  ``comillas''. \\
+    \verb!\today!  
+        &  \today. \\
+    \verb!\hspace{!$l$\verb!}! 
+        & Espacio horizontal. \\
+    \verb!\vspace{!$l$\verb!}! 
+        & Vertical Espacio vertical. \\
+    \verb!\rule{!$w$\verb!}{!$h$\verb!}! 
+        & Linea de ancho $w$ y altura $h$. \\
+\end{tabular}
+\end{center}
+
+
+\section{Tablas}
+Utilizar el ambiente \verb!\begin{tabular}{!\textit{cols}\verb!}!, donde \textit{col} es la definición de las columnas, puede tomar las siguientes especificaciones:
+\begin{center}
+
+
+\begin{tabular}{@{}ll@{}}
+    \texttt{l}    
+        &   Columna justificada a la izquierda.  \\
+    \texttt{c}    
+        &   Columna centrada.  \\
+    \texttt{r}    
+        &   Columna justificada a la derecha. \\
+    \verb!p{!\textit{ancho}\verb!}!  
+        &  Columna de ancho fijo. \\ 
+    \verb!|!      
+        &  Colocar línea vertical entre columnas. 
+\end{tabular}
+\end{center}
+
+Además, con el comando \verb!\hline!  se colocan lineas horizontales. Con el paquete \texttt{booktabs} se tiene las siguientes lineas horizontales.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+    \verb!\toprule! & Linea horizontal de inicio de la tabla.  \\
+    \verb!\midrule! & Linea horizontal de mitad de la tabla.  \\
+    \verb!\bottomrule! & Linea horizontal de final de la tabla.  \\
+\end{tabular}
+\end{center}
+
+\begin{minipage}{0.45\linewidth}
+\begin{tabular}{cc}
+    \toprule
+    Número & Precio \\
+    \midrule
+    1 & \$ 2.00\\
+    2 & \$ 2.00\\
+    \bottomrule
+\end{tabular}
+\end{minipage}
+%
+\begin{minipage}{0.45\linewidth}
+\begin{verbatim}
+\begin{tabular}{cc}
+    \toprule
+    Número & Precio \\
+    \midrule
+    1 & \$ 2.00\\
+    2 & \$ 2.00\\
+    \bottomrule
+\end{tabular}
+\end{verbatim}
+\end{minipage}
+
+
+\section{Gráficos}
+Para la inclusión de gráficos es necesario el paquete \texttt{graphicx}, en caso de ser archivos vectoriales se requiere que el compilador sea \texttt{LaTeX}, de ser mapas de bits se requiere el compilador \texttt{pdfLaTeX}. El comando para incluir la imagen es
+\verb!\includegraphics[!\textit{ops}\verb!]{!\textit{archivo}\verb!}!, por ejemplo
+
+\noindent
+\verb!\includegraphics[width=0.9\linewidth]{grafico1}!
+
+\section{Leer más} 
+Learn \LaTeX{} in 30 minutes en \url{https://es.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes}.
+
+
+\end{multicols}
+\end{document}
